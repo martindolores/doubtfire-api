@@ -397,7 +397,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_24_073540) do
   create_table "tutor_times", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "task_id", null: false
-    t.integer "time_spent", default: 0, null: false
+    t.decimal "time_spent", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_tutor_times_on_task_id"
