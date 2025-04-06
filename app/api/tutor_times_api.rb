@@ -17,7 +17,7 @@ class TutorTimesApi < Grape::API
     params do
       requires :user_id, type: Integer, desc: "User ID (tutor or student)"
       requires :task_id, type: Integer, desc: "Task ID"
-      requires :time_spent, type: Integer, desc: "Time spent (in minutes)"
+      requires :time_spent, type: BigDecimal, desc: "Time spent (in minutes)"
     end
 
     post do
@@ -49,7 +49,7 @@ class TutorTimesApi < Grape::API
       requires :id, type: Integer, desc: "TutorTime ID"
       optional :user_id, type: Integer, desc: "User ID (optional)"
       optional :task_id, type: Integer, desc: "Task ID (optional)"
-      optional :time_spent, type: Integer, desc: "Time spent (in minutes) (optional)"
+      optional :time_spent, type: BigDecimal, desc: "Time spent (in minutes) (optional)"
     end
 
     put ':id' do
