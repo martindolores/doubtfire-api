@@ -541,6 +541,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_24_073540) do
     t.index ["user_id"], name: "index_webcals_on_user_id", unique: true
   end
 
-  add_foreign_key "tutor_times", "tasks"
-  add_foreign_key "tutor_times", "users"
+  add_foreign_key "tutor_times", "tasks", on_delete: :cascade
+  add_foreign_key "tutor_times", "users", on_delete: :cascade
 end
