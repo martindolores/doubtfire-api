@@ -34,7 +34,9 @@ class Task < ApplicationRecord
       :delete_discussion,
       :get_discussion,
       :assess_extension,
-      :request_extension
+      :request_extension,
+      :record_marking_time,
+      :update_marking_time
     ]
     # What can convenors do with tasks?
     convenor_role_permissions = [
@@ -47,14 +49,18 @@ class Task < ApplicationRecord
       :delete_plagiarism,
       :get_discussion,
       :assess_extension,
-      :request_extension
+      :request_extension,
+      :record_marking_time,
+      :update_marking_time
     ]
     # What can admins do with tasks?
     admin_role_permissions = [
       :get,
       :get_submission,
       :view_plagiarism,
-      :get_discussion
+      :get_discussion,
+      :record_marking_time,
+      :update_marking_time
     ]
     # What can auditors do with tasks?
     auditor_role_permissions = [
