@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_28_103033) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_05_121205) do
   create_table "activity_types", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "abbreviation", null: false
@@ -206,6 +206,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_28_103033) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "session_activities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "marking_session_id", null: false
+    t.string "action"
+    t.bigint "project_id"
+    t.bigint "task_id"
+    t.bigint "task_definition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action", "task_id", "created_at"], name: "index_session_activities_on_action_task_created_at"
+    t.index ["marking_session_id"], name: "index_session_activities_on_marking_session_id"
+    t.index ["project_id"], name: "index_session_activities_on_project_id"
+    t.index ["task_definition_id"], name: "index_session_activities_on_task_definition_id"
+    t.index ["task_id"], name: "index_session_activities_on_task_id"
   end
 
   create_table "task_comments", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
@@ -547,4 +562,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_28_103033) do
 
   add_foreign_key "marking_sessions", "units"
   add_foreign_key "marking_sessions", "users", column: "marker_id"
+  add_foreign_key "session_activities", "marking_sessions"
+  add_foreign_key "session_activities", "projects"
+  add_foreign_key "session_activities", "task_definitions"
+  add_foreign_key "session_activities", "tasks"
 end

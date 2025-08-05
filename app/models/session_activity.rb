@@ -4,5 +4,6 @@ class SessionActivity < ApplicationRecord
   belongs_to :task, optional: true
   belongs_to :task_definition, optional: true
 
-  validates :action, presence: { message: "invalid %{action}."}
+  VALID_ACTIONS = %w[inbox GET PUT assessing].freeze
+  validates :action, presence: true, inclusion: { in: VALID_ACTIONS }
 end

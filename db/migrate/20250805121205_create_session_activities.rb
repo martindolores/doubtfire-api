@@ -11,8 +11,6 @@ class CreateSessionActivities < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :session_activities, :action
-    add_index :session_activities, :task_id
-    add_index :session_activities, :created_at
+    add_index :session_activities, [:action, :task_id, :created_at], name: "index_session_activities_on_action_task_created_at"
   end
 end
