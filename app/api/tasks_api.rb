@@ -127,6 +127,14 @@ class TasksApi < Grape::API
     if authorise? current_user, project, :make_submission
       task = project.task_for_task_definition(task_definition)
 
+      SessionTracker.record_assessment_activity(
+        action: "assessing",
+        user: current_user,
+        project: project,
+        ip_address: request.ip,
+        task: task
+      )
+
       # if trigger supplied...
       unless params[:trigger].nil?
         # Check if they should be using portfolio_evidence api
@@ -176,6 +184,15 @@ class TasksApi < Grape::API
     # check the user can put this task
     error!(error: 'You do not have permission to read submissions for this project.') unless authorise? current_user, project, :get_submission
 
+    task = project.has_task_for_task_definition?(task_definition) ? project.task_for_task_definition(task_definition) : nil
+    SessionTracker.record_assessment_activity(
+      action: "inbox",
+      user: current_user,
+      project: project,
+      ip_address: request.ip,
+      task: task
+    )
+
     # ensure there can be a pdf...
     needs_upload_docs = !task_definition.upload_requirements.empty?
 
@@ -214,6 +231,13 @@ class TasksApi < Grape::API
 
     # Get the actual task...
     task = project.task_for_task_definition(task_definition)
+    SessionTracker.record_assessment_activity(
+      action: "inbox",
+      user: current_user,
+      project: project,
+      ip_address: request.ip,
+      task: task
+    )
 
     # Find the file
     file_loc = FileHelper.zip_file_path_for_done_task(task)
