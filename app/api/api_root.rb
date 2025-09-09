@@ -86,6 +86,7 @@ class ApiRoot < Grape::API
   mount UsersApi
   mount WebcalApi
   mount WebcalPublicApi
+  mount MarkingSessionsApi
 
   #
   # Add auth details to all end points
@@ -122,6 +123,8 @@ class ApiRoot < Grape::API
   AuthenticationHelpers.add_auth_to UnitRolesApi
   AuthenticationHelpers.add_auth_to UnitsApi
   AuthenticationHelpers.add_auth_to WebcalApi
+  AuthenticationHelpers.add_auth_to MarkingSessionsApi
+
 
   add_swagger_documentation \
     base_path: nil,

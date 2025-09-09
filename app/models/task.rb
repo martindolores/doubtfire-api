@@ -123,6 +123,7 @@ class Task < ApplicationRecord
   has_many :task_submissions, dependent: :destroy
   has_many :overseer_assessments, dependent: :destroy
   has_many :tii_submissions, dependent: :destroy
+  has_many :session_activities, dependent: :destroy
 
   delegate :unit, to: :project
   delegate :student, to: :project

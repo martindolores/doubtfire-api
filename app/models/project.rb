@@ -28,6 +28,7 @@ class Project < ApplicationRecord
   has_many :task_engagements, through: :tasks
   has_many :comments, through: :tasks
   has_many :tutorial_enrolments, dependent: :destroy
+  has_many :session_activities,  dependent: :destroy
 
   has_many :learning_outcome_task_links, through: :tasks
 
