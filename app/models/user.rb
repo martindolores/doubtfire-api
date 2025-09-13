@@ -135,6 +135,7 @@ class User < ApplicationRecord
   has_many    :unit_roles, dependent: :destroy
   has_many    :projects, dependent: :destroy
   has_many    :auth_tokens, dependent: :destroy
+  has_many    :marking_sessions, foreign_key: 'marker_id', dependent: :destroy
   has_one     :webcal, dependent: :destroy
 
   # Model validations/constraints
